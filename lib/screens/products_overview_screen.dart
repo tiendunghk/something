@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_provider/providers/cart.dart';
+import 'package:shop_provider/widgets/app_drawer.dart';
 import 'package:shop_provider/widgets/badge.dart';
 import 'package:shop_provider/widgets/products_grid.dart';
 
@@ -25,7 +26,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           PopupMenuButton(
             onSelected: (FilterOptions selectedValue) {
               setState(() {
-                print(selectedValue);
                 if (selectedValue == FilterOptions.Favorites) {
                   _showOnlyFavoritesData = true;
                 } else {
@@ -56,6 +56,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           )
         ],
       ),
+      drawer: AppDrawer(),
       body: ProductsGrid(_showOnlyFavoritesData),
     );
   }
