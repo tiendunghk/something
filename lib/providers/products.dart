@@ -33,7 +33,6 @@ class Products with ChangeNotifier {
         false),
   ];
 
-
   List<Product> get items {
     return [..._items];
   }
@@ -42,8 +41,28 @@ class Products with ChangeNotifier {
     return _items.where((prod) => prod.isFavorite).toList();
   }
 
-  void addProduct() {
-    //_items.add(value);
+  void addProduct(Product product) {
+    var prod = Product(
+        DateTime.now().toString(),
+        product.title,
+        product.description,
+        product.price,
+        product.imageUrl,
+        product.isFavorite);
+    _items.add(prod);
+    notifyListeners();
+  }
+
+  void updateProduct(String id, Product product) {
+    final prodIndex = _items.indexWhere((prod) => prod.id == id);
+    if (prodIndex >= 0) {
+      _items[prodIndex] = product;
+      notifyListeners();
+    }
+  }
+
+  void deleteProduct(String id) {
+    _items.removeWhere((prod) => prod.id == id);
     notifyListeners();
   }
 
